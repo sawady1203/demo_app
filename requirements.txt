@@ -1,0 +1,6 @@
+Django==2.2.2
+django-environ==0.4.5
+numpy==1.16.4
+python-dotenv==0.10.3
+pytz==2019.1
+sqlparse==0.3.0
