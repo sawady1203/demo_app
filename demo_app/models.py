@@ -3,7 +3,7 @@ from datetime import date
 
 # Create your models here.
 
-class Customers(models.Model):
+class Customer(models.Model):
     # 選択式のものはここで定義します（左：実際にDBに格納される値、右：UIに表示される値）
     education_options = (
     (1, 'graduate_school'),
