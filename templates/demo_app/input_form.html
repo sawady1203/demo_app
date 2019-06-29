@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>情報入力画面</h1>
-        <form class="register-form" action="input_form" method="post">{% csrf_token %}
+        <form class="register-form" method="post" action="{% url 'demo_app:input_form' %}">{% csrf_token %}
 
             <!-- 名前セクション -->
             <div class="row" style="margin-bottom:40px">
