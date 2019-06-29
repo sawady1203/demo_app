@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG")
 # DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", ".pythonanywhere.com"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -131,3 +131,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # STATIC_ROOT = '/var/www/{}/static'.format(PROJECT_NAME)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
