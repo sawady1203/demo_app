@@ -65,7 +65,9 @@ class Customer(models.Model):
 
     # 管理画面に表示方法を定義：必須項目が入っているかどうかで表示内容を分ける
     def __str__(self):
+        # 推論されていない場合
         if self.proba == 0.0:
             return '%s, %d, %s' % (self.registered_date.strftime('%Y-%m-%d'), self.id, self.last_name+self.first_name)
+        # 推論されている場合
         else:
             return '%s, %d, %s, %d, %s, %s' % (self.registered_date.strftime('%Y-%m-%d'), self.id, self.last_name+self.first_name, self.result, '{}%'.format(round(self.proba*100, 2)), self.comment)
