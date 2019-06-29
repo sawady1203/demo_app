@@ -5,4 +5,5 @@ app_name = 'demo_app'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('input_form', views.input_form, name='input_form'),
 ]
