@@ -1,19 +1,23 @@
 from django.shortcuts import render, redirect
-from .forms import InputForm
-
-# from sklearn.externals import joblib
+from django.contrib.auth import login, authenticate
+from .forms import InputForm, SignUpForm
 import joblib
+from datetime import date
 import numpy as np
 from .models import Customer
+from django.contrib.auth.decorators import login_required
+
+
 
 # 学習済みモデルの読み込み
 # 最初に読み込んだ方が一回で済む
 loaded_model = joblib.load('demo_app/demo_model.pkl')
 
-# Create your views here.
+@login_required
 def index(request):
     return render(request, 'demo_app/index.html', {})
 
+@login_required
 def input_form(request):
     if request.method == "POST":
         form = InputForm(request.POST)
@@ -24,6 +28,7 @@ def input_form(request):
         form = InputForm()
         return render(request, 'demo_app/input_form.html', {'form':form})
 
+@login_required
 def result(request):
     # 最新データを持ってきて推論結果を渡したい
     _data = Customer.objects.order_by('id').reverse().values_list\
@@ -62,6 +67,7 @@ def result(request):
     }
     return render(request, 'demo_app/result.html', contexts)
 
+@login_required
 def history(request):
     if request.method == 'POST':
         print(request)
@@ -80,3 +86,19 @@ def history(request):
             'customers': customers
         }
         return render(request, 'demo_app/history.html', contexts)
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            print('username: ' + username)
+            print('raw_password: ' + raw_password)
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('demo_app:index')
+    else:
+        form = SignUpForm()
+    return render(request, 'demo_app/signup.html', {'form': form})
