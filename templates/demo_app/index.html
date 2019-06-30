@@ -4,6 +4,25 @@
 
 {% block content %}
 
-    <h1>Hello Django!! This is demo_app/index page</h1>
+<div class="row">
+    <div class="col s2">
+    </div>
+    <div class="col s8">
+        <h5>顧客リストに新規登録するか、過去の顧客を確認するか選んでください</h5>
+    </div>
+    <div class="col s2">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s2">
+    </div>
+    <div class="col s8">
+        <a href="{% url 'demo_app:input_form' %}"><button type="button" name="input" style="padding: 10px 20px; margin-right: 30px;">新規顧客をリストに登録する。</button></a>
+        <a href="{% url 'demo_app:history' %}"><button type="button" name="history" style="padding: 10px 20px;">顧客リストを確認する。</button></a>
+    </div>
+    <div class="col s2">
+    </div>
+</div>
 
 {% endblock %}
